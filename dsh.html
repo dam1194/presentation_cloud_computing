@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum-Safe Cryptography: The Future-Proof Cloud Lock</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f1b33 0%, #1a2b4d 100%);
+            color: #e0f7ff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header with progress bar */
+        .presentation-header {
+            padding: 15px 30px;
+            background: rgba(10, 25, 47, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00e5ff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: #00e5ff;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #00e5ff, #00b8d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .progress-container {
+            width: 300px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00e5ff, #00b8d4);
+            width: 10%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .slide-counter {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Main slide area */
+        .slides-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 60px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00e5ff, #b388ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-content {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .slide-text {
+            flex: 1;
+            font-size: 22px;
+            line-height: 1.6;
+            color: #c2e9ff;
+        }
+
+        .highlight {
+            color: #00e5ff;
+            font-weight: 700;
+        }
+
+        .visual-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        /* Navigation buttons */
+        .nav-buttons {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 229, 255, 0.2);
+            border: 2px solid #00e5ff;
+            color: #00e5ff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 229, 255, 0.4);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #00e5ff;
+        }
+
+        /* Presenter indicator */
+        .presenter-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            background: rgba(179, 136, 255, 0.2);
+            border-radius: 20px;
+            border-left: 4px solid #b388ff;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        /* Special styling for different slides */
+        .split-container {
+            display: flex;
+            width: 100%;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .split-item {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .split-item:hover {
+            transform: translateY(-5px);
+            border-color: #00e5ff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .split-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #00e5ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 28px;
+        }
+
+        /* Visual elements */
+        .visual {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quantum-vs-classical {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .bit-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bit-label {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #00e5ff;
+        }
+
+        .classical-bit {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff5252, #ff8a80);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 82, 82, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .classical-bit::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .qubit {
+            width: 120px;
+            height: 120px;
+            background: conic-gradient(#00e5ff, #b388ff, #00e5ff);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
+            position: relative;
+            animation: spin 4s linear infinite;
+        }
+
+        .qubit-inner {
+            width: 80px;
+            height: 80px;
+            background: #0f1b33;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            z-index: 2;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .vault-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .vault {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #3a3a3a, #1a1a1a);
+            border-radius: 20px;
+            position: relative;
+            border: 15px solid #8b7355;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .vault-door {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #5d4037, #3e2723);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .vault-lock {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #ffd54f, #ffb300);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #5d4037;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .quantum-key {
+            position: absolute;
+            top: 120px;
+            right: 100px;
+            width: 80px;
+            transform: rotate(45deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(-20px); }
+        }
+
+        .key-body {
+            width: 60px;
+            height: 20px;
+            background: linear-gradient(90deg, #00e5ff, #b388ff);
+            border-radius: 10px;
+        }
+
+        .key-teeth {
+            width: 40px;
+            height: 15px;
+            background: linear-gradient(90deg, #00e5ff, #b388ff);
+            border-radius: 5px;
+            margin-left: -10px;
+            margin-top: 2.5px;
+        }
+
+        /* Crypto algorithm visuals */
+        .algorithm-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .algorithm-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .algorithm-card:hover {
+            transform: translateY(-5px);
+            border-color: #00e5ff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .algorithm-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #00e5ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .algorithm-icon {
+            font-size: 24px;
+        }
+
+        .algorithm-desc {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #c2e9ff;
+        }
+
+        /* Cloud migration flowchart */
+        .flowchart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin: 0 30px;
+        }
+
+        .flow-node {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(0, 229, 255, 0.1);
+            border: 3px solid #00e5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #00e5ff;
+            margin-bottom: 15px;
+        }
+
+        .flow-arrow {
+            position: absolute;
+            top: 40px;
+            right: -60px;
+            font-size: 40px;
+            color: #00e5ff;
+        }
+
+        .flow-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00e5ff;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1100px) {
+            .slide-content {
+                flex-direction: column;
+            }
+            
+            .slide-text {
+                font-size: 20px;
+            }
+            
+            .slide-title {
+                font-size: 36px;
+            }
+            
+            .split-container {
+                flex-direction: column;
+            }
+            
+            .algorithm-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Header with progress -->
+        <div class="presentation-header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="logo-text">Quantum-Safe Cryptography</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+        </div>
+
+        <!-- Slides container -->
+        <div class="slides-container">
+            <!-- Slide 1: Title -->
+            <div class="slide active" id="slide1">
+                <h1 class="slide-title">Quantum-Safe Cryptography</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p><span class="highlight">The Future-Proof Lock for the Cloud</span></p>
+                        <p style="margin-top: 30px; font-size: 28px;">Presented by: Dhay & Shoaq</p>
+                        <p style="margin-top: 20px; font-size: 24px;">Cloud Computing Course - Cybersecurity</p>
+                        <div style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 50px; height: 50px; background: rgba(0, 229, 255, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-cloud" style="color: #00e5ff; font-size: 24px;"></i>
+                            </div>
+                            <div style="font-size: 20px;">Securing the cloud against tomorrow's threats today</div>
+                        </div>
+                    </div>
+                    <div class="visual-container">
+                        <div class="vault-container">
+                            <div class="vault">
+                                <div class="vault-door">
+                                    <div class="vault-lock">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quantum-key">
+                                <div class="key-body"></div>
+                                <div class="key-teeth"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Shoaq</div>
+            </div>
+
+            <!-- Slide 2: The Hook -->
+            <div class="slide" id="slide2">
+                <h1 class="slide-title">The Looming Storm Cloud</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>Imagine the most secure bank vault in the world, protected by a lock that would take <span class="highlight">every computer on Earth billions of years to crack</span>.</p>
+                        <p style="margin-top: 20px;">Now imagine someone invents a <span class="highlight">master key</span> that can open that lock in <span class="highlight">minutes</span>.</p>
+                        <p style="margin-top: 20px;">That's not science fiction. That's the threat <span class="highlight">quantum computers</span> pose to <span class="highlight">today's cloud security</span>.</p>
+                        <p style="margin-top: 30px; font-size: 26px; font-weight: 600;">Our entire digital world is protected by locks that a powerful enough quantum computer could simply shatter.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="split-container">
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-vault icon"></i>
+                                    Today's Security
+                                </div>
+                                <p>RSA & ECC encryption protect cloud data, emails, banking, and government secrets.</p>
+                                <div style="margin-top: 20px; font-size: 60px; text-align: center; color: #4CAF50;">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-key icon"></i>
+                                    Quantum Threat
+                                </div>
+                                <p>Quantum computers running Shor's algorithm could break these in hours or days.</p>
+                                <div style="margin-top: 20px; font-size: 60px; text-align: center; color: #FF5252;">
+                                    <i class="fas fa-unlock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Shoaq</div>
+            </div>
+
+            <!-- Slide 3: Foundation -->
+            <div class="slide" id="slide3">
+                <h1 class="slide-title">What We All Know</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>Let's start with what we already know from our courses:</p>
+                        <div class="split-container" style="margin-top: 30px;">
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-handshake icon"></i>
+                                    Asymmetric Crypto
+                                </div>
+                                <p><span class="highlight">RSA & ECC:</span> The magic handshake</p>
+                                <ul style="margin-top: 15px; padding-left: 20px; font-size: 20px;">
+                                    <li>Uses <span class="highlight">public key</span> (lock) to encrypt</li>
+                                    <li>Uses <span class="highlight">private key</span> (secret key) to decrypt</li>
+                                    <li>Secures TLS/SSL connections, emails, digital signatures</li>
+                                </ul>
+                            </div>
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-bolt icon"></i>
+                                    Symmetric Crypto
+                                </div>
+                                <p><span class="highlight">AES:</span> Fast and strong for bulk encryption</p>
+                                <ul style="margin-top: 15px; padding-left: 20px; font-size: 20px;">
+                                    <li>Used <span class="highlight">after</span> the handshake</li>
+                                    <li>Encrypts the actual data</li>
+                                    <li>Not directly broken by quantum computers</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="margin-top: 30px; background: rgba(255, 82, 82, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #FF5252;">
+                            <p style="font-size: 22px;"><span class="highlight">The Problem:</span> RSA and ECC security relies on hard math problems (factoring huge numbers) that are <span class="highlight">easy for quantum computers</span> with Shor's algorithm.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Dhay</div>
+            </div>
+
+            <!-- Slide 4: Quantum Computers -->
+            <div class="slide" id="slide4">
+                <h1 class="slide-title">The Game Changer</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>So, what's a quantum computer? Forget everything you know about bits:</p>
+                        <div class="quantum-vs-classical" style="margin-top: 40px;">
+                            <div class="bit-container">
+                                <div class="classical-bit">
+                                    0/1
+                                </div>
+                                <div class="bit-label">Classical Bit</div>
+                                <p style="margin-top: 15px; text-align: center;">A light switch<br><span class="highlight">On (1) or Off (0)</span></p>
+                            </div>
+                            <div class="bit-container">
+                                <div class="qubit">
+                                    <div class="qubit-inner">
+                                        0 & 1
+                                    </div>
+                                </div>
+                                <div class="bit-label">Quantum Bit (Qubit)</div>
+                                <p style="margin-top: 15px; text-align: center;">A spinning globe<br><span class="highlight">Can be both 0 AND 1 at once</span><br>(Superposition)</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 40px;">
+                            <p><span class="highlight">The Power:</span> Qubits can be in superposition and entangled, letting quantum computers explore <span class="highlight">many possible solutions simultaneously</span>.</p>
+                            <div style="background: rgba(0, 229, 255, 0.1); padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #00e5ff;">
+                                <p style="font-size: 22px;"><span class="highlight">Shor's Algorithm:</span> This quantum algorithm is the master key. It can <span class="highlight">break the hard math</span> that RSA and ECC rely on, potentially in <span class="highlight">hours or days</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Shoaq</div>
+            </div>
+
+            <!-- Slide 5: Why We Care -->
+            <div class="slide" id="slide5">
+                <h1 class="slide-title">Why Should WE Care?</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>This isn't just about future tech. It's a <span class="highlight">clear and present danger</span> for cloud architecture:</p>
+                        <div class="algorithm-grid" style="margin-top: 30px;">
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-database icon"></i>
+                                    Harvest Now, Decrypt Later
+                                </div>
+                                <div class="algorithm-desc">
+                                    Attackers can <span class="highlight">steal encrypted cloud data today</span> and store it. Once quantum computers are ready, they decrypt it years later.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-server icon"></i>
+                                    Longevity of Cloud Systems
+                                </div>
+                                <div class="algorithm-desc">
+                                    Cloud infrastructure is built to last <span class="highlight">decades</span>. We're deploying systems today that will still be running when quantum computers arrive.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-microchip icon"></i>
+                                    The Internet of (Vulnerable) Things
+                                </div>
+                                <div class="algorithm-desc">
+                                    Smart cities, cars, sensors - many will be in the field for <span class="highlight">20+ years</span>. We can't update their crypto later.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-user-shield icon"></i>
+                                    Our Responsibility
+                                </div>
+                                <div class="algorithm-desc">
+                                    As future cybersecurity professionals, we need to understand and prepare for this <span class="highlight">architectural shift</span> in cloud security.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Dhay</div>
+            </div>
+
+            <!-- Slide 6: The Heroes -->
+            <div class="slide" id="slide6">
+                <h1 class="slide-title">The Heroes Enter</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>Enter the heroes: <span class="highlight">Quantum-Safe Cryptography</span> (also called Post-Quantum Cryptography - PQC).</p>
+                        <div style="margin-top: 30px; display: flex; align-items: center; gap: 20px; background: rgba(179, 136, 255, 0.1); padding: 25px; border-radius: 15px; border-left: 5px solid #b388ff;">
+                            <div style="font-size: 60px; color: #b388ff;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <p style="font-size: 24px;">These are <span class="highlight">new cryptographic algorithms</span> designed to run on the computers and phones we have today, but whose security is based on math problems that are <span class="highlight">hard for both classical AND quantum computers</span>.</p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 30px; font-size: 26px;">They are the <span class="highlight">new, future-proof locks</span> for our cloud vaults.</p>
+                        <div style="margin-top: 40px; display: flex; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 60px; color: #00e5ff;">
+                                    <i class="fas fa-lock"></i>
+                                    <i class="fas fa-arrow-right" style="margin: 0 30px;"></i>
+                                    <i class="fas fa-lock" style="color: #4CAF50; font-size: 70px;"></i>
+                                </div>
+                                <div style="margin-top: 15px; font-size: 20px;">
+                                    Old Vulnerable Lock → New Quantum-Safe Lock
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Shoaq</div>
+            </div>
+
+            <!-- Slide 7: The New Locks -->
+            <div class="slide" id="slide7">
+                <h1 class="slide-title">How Do These New Locks Work?</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>The cool part! NIST is running a competition to pick the best QSC algorithms. They rely on different, harder puzzles:</p>
+                        <div class="algorithm-grid" style="margin-top: 30px;">
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-th icon"></i>
+                                    Lattice-Based
+                                </div>
+                                <div class="algorithm-desc">
+                                    <span class="highlight">"Finding a needle in a multidimensional haystack."</span> Security based on the difficulty of finding the shortest point in a complex lattice. <span class="highlight">(Leading candidate)</span>
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-code icon"></i>
+                                    Code-Based
+                                </div>
+                                <div class="algorithm-desc">
+                                    <span class="highlight">"Correcting giant, noisy codes."</span> Based on the difficulty of decoding a random linear code. Been around for decades and considered very strong.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-link icon"></i>
+                                    Hash-Based
+                                </div>
+                                <div class="algorithm-desc">
+                                    <span class="highlight">"Chaining hashes together."</span> Uses the security of hash functions (like SHA-256) to build digital signatures. Very conservative and trusted.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-project-diagram icon"></i>
+                                    Others
+                                </div>
+                                <div class="algorithm-desc">
+                                    <span class="highlight">Multivariate & Isogeny-Based:</span> Other fascinating mathematical approaches being researched and tested in the NIST competition.
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 30px; background: rgba(255, 193, 7, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #FFC107;">
+                            <p style="font-size: 22px;"><span class="highlight">NIST Competition:</span> The National Institute of Standards and Technology is currently finalizing standards for quantum-safe cryptography, with winners announced in 2022-2024.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Dhay</div>
+            </div>
+
+            <!-- Slide 8: Cloud Migration -->
+            <div class="slide" id="slide8">
+                <h1 class="slide-title">What This Means for the Cloud</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>Migrating the cloud to QSC isn't just a software update. It's a major shift:</p>
+                        
+                        <div class="flowchart">
+                            <div class="flow-step">
+                                <div class="flow-node">
+                                    <i class="fas fa-cloud"></i>
+                                </div>
+                                <div class="flow-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="flow-label">Legacy Cloud</div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-node">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <div class="flow-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="flow-label">Crypto-Agility</div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-node">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="flow-label">Quantum-Safe Cloud</div>
+                            </div>
+                        </div>
+
+                        <div class="split-container" style="margin-top: 50px;">
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-exchange-alt icon"></i>
+                                    Crypto-Agility
+                                </div>
+                                <p>The #1 concept for cloud architects. It means designing systems <span class="highlight">now</span> so we can <span class="highlight">easily swap out cryptographic algorithms</span> later.</p>
+                                <p style="margin-top: 15px;">Think of it as building a lock with <span class="highlight">interchangeable cores</span>.</p>
+                            </div>
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-random icon"></i>
+                                    Hybrid Cryptography
+                                </div>
+                                <p>The smart transition path. For now, we can use <span class="highlight">both</span> traditional RSA <span class="highlight">and</span> a quantum-safe algorithm together.</p>
+                                <p style="margin-top: 15px;">This protects against <span class="highlight">both current and future threats</span> during the transition.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px; background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #4CAF50;">
+                            <p style="font-size: 22px;"><span class="highlight">The Challenge:</span> Larger key sizes and signatures mean more bandwidth and slightly slower handshakes. This affects every TLS connection, VPN, and software update in the cloud.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Shoaqah</div>
+            </div>
+
+            <!-- Slide 9: Our Role -->
+            <div class="slide" id="slide9">
+                <h1 class="slide-title">Our Role as Future Professionals</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <p>So, what does this mean for <span class="highlight">us</span> as cybersecurity students?</p>
+                        
+                        <div class="algorithm-grid" style="margin-top: 30px;">
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-lightbulb icon"></i>
+                                    1. Awareness
+                                </div>
+                                <div class="algorithm-desc">
+                                    We now know this is a real, <span class="highlight">architectural problem</span>, not a sci-fi movie plot. Understanding the threat landscape is our first job.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-question-circle icon"></i>
+                                    2. Demand Crypto-Agility
+                                </div>
+                                <div class="algorithm-desc">
+                                    In our future jobs, when designing or reviewing cloud systems, we must ask: <span class="highlight">"Is this system crypto-agile?"</span>
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-graduation-cap icon"></i>
+                                    3. Lifelong Learning
+                                </div>
+                                <div class="algorithm-desc">
+                                    The NIST standards are being finalized <span class="highlight">now</span>. Following this evolution is part of our career. We will be the experts who help organizations transition safely.
+                                </div>
+                            </div>
+                            <div class="algorithm-card">
+                                <div class="algorithm-title">
+                                    <i class="fas fa-users icon"></i>
+                                    4. Be The Bridge
+                                </div>
+                                <div class="algorithm-desc">
+                                    We understand both cloud architecture and security. We can translate between developers, architects, and security teams during this critical migration.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 40px; text-align: center; font-size: 26px;">
+                            <p>We are the generation that will <span class="highlight">design, build, and secure</span> the quantum-safe cloud infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="presenter-indicator">Dhay</div>
+            </div>
+
+            <!-- Slide 10: Conclusion -->
+            <div class="slide" id="slide10">
+                <h1 class="slide-title">Conclusion</h1>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <div style="font-size: 60px; color: #00e5ff; margin-bottom: 20px;">
+                                <i class="fas fa-flag-checkered"></i>
+                            </div>
+                            <p style="font-size: 32px;">To wrap up:</p>
+                        </div>
+                        
+                        <div class="split-container">
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-exclamation-triangle icon"></i>
+                                    The Threat
+                                </div>
+                                <p>Quantum computers are a paradigm shift that will break the bedrock of today's cloud security.</p>
+                            </div>
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-solution icon"></i>
+                                    The Solution
+                                </div>
+                                <p>Quantum-Safe Cryptography provides new algorithms based on quantum-hard math problems.</p>
+                            </div>
+                            <div class="split-item">
+                                <div class="split-title">
+                                    <i class="fas fa-road icon"></i>
+                                    The Path Forward
+                                </div>
+                                <p>The transition starts now with crypto-agile design in cloud architecture.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 50px; text-align: center;">
+                            <div style="font-size: 36px; font-weight: 700; line-height: 1.4; background: linear-gradient(90deg, #00e5ff, #b388ff); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                                <p>The Threat is Future.</p>
+                                <p>The Solution is Now.</p>
+                                <p>The Responsibility is Ours.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 50px; text-align: center; font-size: 42px; color: #00e5ff;">
+                            <p>Thank You!</p>
+                            <!-- <p style="font-size: 32px; margin-top: 20px;">Questions?</p> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="presenter-indicator">Both Presenters</div> -->
+            </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="nav-buttons">
+            <div class="nav-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="nav-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            const currentSlideElement = document.getElementById('currentSlide');
+            const totalSlidesElement = document.getElementById('totalSlides');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            totalSlidesElement.textContent = totalSlides;
+            
+            // Initialize first slide
+            updateSlide();
+            
+            // Next button click
+            nextBtn.addEventListener('click', function() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            });
+            
+            // Previous button click
+            prevBtn.addEventListener('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    if (currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                        updateSlide();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateSlide();
+                    }
+                }
+            });
+            
+            // Update slide display
+            function updateSlide() {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Show current slide
+                slides[currentSlide].classList.add('active');
+                
+                // Update progress bar
+                const progress = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                // Update slide counter
+                currentSlideElement.textContent = currentSlide + 1;
+                
+                // Update presenter indicator based on slide
+                updatePresenterIndicator();
+            }
+            
+            function updatePresenterIndicator() {
+                // This is just for visual feedback - in real presentation you'd use your actual names
+                const presenterIndicators = document.querySelectorAll('.presenter-indicator');
+                
+                // Based on our script:
+                // Slide 1, 2, 4, 6, 8: Presenter 1
+                // Slide 3, 5, 7, 9: Presenter 2
+                // Slide 10: Both
+            }
+            
+            // Add click to advance on slide (except on interactive elements)
+            document.querySelector('.slides-container').addEventListener('click', function(e) {
+                // Only advance if clicking on the slide itself, not buttons or interactive elements
+                if (e.target.closest('.nav-btn') || e.target.closest('.split-item') || 
+                    e.target.closest('.algorithm-card') || e.target.closest('.visual-container')) {
+                    return;
+                }
+                
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            });
+            
+            // Add some interactive animations
+            const splitItems = document.querySelectorAll('.split-item');
+            splitItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add animation to algorithm cards
+            const algorithmCards = document.querySelectorAll('.algorithm-card');
+            algorithmCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
